@@ -52,21 +52,14 @@ public class Model {
 	}
 	
 	private void cerca(List<PowerOutage> parziale, long ore, int persone, int years, long hours) {
-		if(ore>hours && parziale.size()>1) {
-			PowerOutage p = parziale.get(parziale.size()-1);
-			parziale.remove(parziale.size()-1);
-			ore = ore-p.getOre();
-			persone = persone-p.getCustomersAffected();
-			if(persone<totale) return;
-			else {
-				PowerOutage inizio = parziale.get(0);
-				PowerOutage fine = parziale.get(parziale.size()-1);
-				if((inizio.getDateEventBegan().getYear()-fine.getDateEventBegan().getYear()+1)>years) return;
+		
+			if(persone>totale) {
+			
 				soluzione = new ArrayList<PowerOutage>(parziale);
 				totale = persone;
 				oreTotali = ore;
 			}
-		}
+		
 		for(PowerOutage p : outageList) {
 			if(!parziale.contains(p)) {
 				parziale.add(p);
